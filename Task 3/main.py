@@ -18,7 +18,7 @@ def passwordGenerator(length = 10):
 
 def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
 
-if __name__ == '__main__':
+def main():
     while True:
         try:
             length = int(input("Enter the desired password length (default is 10): "))
@@ -36,6 +36,10 @@ if __name__ == '__main__':
         print()
 
         choice = input("Do you want to generate another password? (Y/N): ").lower()
-        if choice != 'y':
+        if choice!= 'y':
             break
         print()
+
+
+if __name__ == '__main__':
+    main()

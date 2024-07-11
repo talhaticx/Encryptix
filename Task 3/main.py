@@ -1,5 +1,10 @@
+#!/bin/python3
+
 import string
 import random
+from rich.console import Console
+
+console = Console()
 
 def passwordGenerator(length = 10):
     # Define the character sets
@@ -16,8 +21,9 @@ def passwordGenerator(length = 10):
 
     return password
 
-def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
-
+def prPurple(skk): 
+    print("\033[1m\033[92m {}\033[00m".format(skk))
+    
 def main():
     while True:
         try:

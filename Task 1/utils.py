@@ -67,7 +67,7 @@ def printTask(database):
             Padding(":white_heavy_check_mark:" if task[3] else ":x:", padding)
         )
 
-    console.print(table)
+    console.print(table, justify="center")
     print()
 
 def printToDo(todos):

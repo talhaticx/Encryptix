@@ -40,7 +40,7 @@ def get_operation():
         if operation in operations:
             return operation
         else:
-            print("Invalid operation. Please choose a valid operation.")
+            console.print("Invalid operation. Please choose a valid operation.", style="bold red")
 
 def calculate(num1, num2, operation):
     if operation == "+":

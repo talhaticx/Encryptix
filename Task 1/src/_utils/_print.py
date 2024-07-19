@@ -1,23 +1,28 @@
-from rich.console import Console
-from rich.table import Table
-from rich.padding import Padding
+from ._rich import *
 
-import os
-import platform
 
-console = Console()
+def printList(list: list):
+    """print list of database
+    if list of tasks, then will also show the status of completion in for of emojis
+
+    Args:
+        list (list): list of tuples from databases
+    """
+    
+    try:
+        print()
+        for idx, item in enumerate(list):
+            console.print(f" id: [i]%2d[/i], title: [i] {item[0]}[/i], completed: {":white_heavy_check_mark:" if item[3] else ":x:"}" % (idx + 1), style="green bold" )
+        print()
+    except:
+        print()
+        for item in range(len(list)):
+            console.print(f" id: [i]%2d[/i], title: [i] {list[item][0]}[/i]" % (item + 1), style="green bold" )
+        print()
         
-def clear_terminal():
-    current_os = platform.system()
-    if current_os == 'Windows':
-        os.system('cls')
-    else:  # Linux and MacOS
-        os.system('clear')
-
-def wait_for_enter():
-    input("Press Enter to continue...")
-
 def printMenu():
+    """print the menu for tasks
+    """
     table = Table(title="Task Manager Menu")
 
     table.add_column("Option", justify="center", style="red bold", no_wrap=True)
@@ -33,11 +38,17 @@ def printMenu():
     table.add_row(Padding("5", padding1), Padding("Mark task as completed", padding2))
     table.add_row(Padding("6", padding1), Padding("Mass remove task", padding2))
     table.add_row(Padding("7", padding1), Padding("Mass mark task as completed", padding2))
-    table.add_row(Padding("8", (1,5,1,5)), Padding("Exit", (1,5,1,7)))
-
+    table.add_row(Padding("0", (1,5,1,5)), Padding("Exit", (1,5,1,7)))
+    print()
     console.print(table, justify="center")
+    print()
 
 def printTask(database):
+    """print the tasks in the database
+
+    Args:
+        database (list): list of tuples containing ID, title, description and status of completion
+    """
     tasks = database.query()
     if not tasks:
         console.print("No tasks found.", style="red bold")
@@ -66,10 +77,6 @@ def printTask(database):
             Padding(str(task[2]), padding),
             Padding(":white_heavy_check_mark:" if task[3] else ":x:", padding)
         )
-
+    print()
     console.print(table, justify="center")
     print()
-
-def printToDo(todos):
-    for todo in todos:
-        console.print(f" id: [i]%2d[/i], title: [i] {todo[1]}[/i]" % todo[0], style="green bold" )
